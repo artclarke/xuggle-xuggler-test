@@ -4,7 +4,7 @@
 
  <groupId>com.xuggle</groupId>
  <artifactId>xuggle-xuggler-test</artifactId>
- <version>1.0-SNAPSHOT</version>
+ <version>5.3</version>
  <packaging>jar</packaging>
 
  <name>xuggle-xuggler-test</name>
