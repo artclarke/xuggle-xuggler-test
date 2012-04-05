@@ -19,7 +19,7 @@
   <dependency>
    <groupId>xuggle</groupId>
    <artifactId>xuggle-xuggler</artifactId>
-   <version>5.2</version>
+   <version>5.3</version>
    <scope>test</scope>
   </dependency>
   <dependency>
@@ -34,6 +34,14 @@
    <version>1.21.888.200908201439</version>
   </dependency>
  </dependencies>
+ <developers>
+  <developer>
+   <id>art.clarke@gmail.com</id>
+   <name>Art Clarke</name>
+   <email>art.clarke@gmail.com</email>
+   <url>http://www.linkedin.com/in/artclarke</url>
+  </developer>
+ </developers>
  <scm>
   <developerConnection></developerConnection>
   <tag>xuggle</tag>
@@ -51,8 +59,8 @@
     <artifactId>maven-compiler-plugin</artifactId>
     <version>2.3.2</version>
     <configuration>
-     <source>1.5</source>
-     <target>1.5</target>
+     <source>1.6</source>
+     <target>1.6</target>
     </configuration>
    </plugin>
 
@@ -129,5 +137,21 @@
    <id>xuggle repo</id>
    <url>http://xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
   </repository>
+  <repository>
+   <id>local repo</id>
+   <url>file://${user.home}/.m2/repository</url>
+   <releases>
+    <enabled>false</enabled>
+    <updatePolicy>always</updatePolicy>
+    <checksumPolicy>warn</checksumPolicy>
+   </releases>
+   <snapshots>
+    <enabled>true</enabled>
+    <updatePolicy>always</updatePolicy>
+    <checksumPolicy>fail</checksumPolicy>
+   </snapshots>
+   <layout>default</layout>
+  </repository>
+
  </repositories>
 </project>
