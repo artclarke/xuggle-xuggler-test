@@ -28,7 +28,6 @@ import java.util.Vector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
@@ -208,8 +207,12 @@ public class MediaWriterExhaustiveTest
   }
 
   @Test
-  @Ignore // ignore for 3.3
-    public void transcodeTest()
+  public void testNothing()
+  {
+    
+  }
+
+  public void transcodeTest()
   {
     // setup and test file status
 

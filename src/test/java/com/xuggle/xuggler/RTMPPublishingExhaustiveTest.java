@@ -10,6 +10,8 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -21,15 +23,69 @@ import org.junit.Test;
  */
 public class RTMPPublishingExhaustiveTest
 {
+  private final Logger log = LoggerFactory.getLogger(this.getClass());
+
   // This assumes a Wowza installation is installed with an application
   // called live.  To verify the test, use a RTMP player to watch the stream
   private static final int SERVER_PORT = 1935;
-  private static final String SERVER_NAME = "10.0.1.15";
+  private static final String SERVER_NAME = "127.0.0.1";
   private static final String APP_NAME = "vod";
   private static final String STREAM_NAME = "test";
   private static final String DOWNLOAD_NAME = "sample.mp4";
   private static final String PROTOCOL_NAME = "rtmpe";
   
+  //@Test
+  public void testRTSPRead() throws ParseException
+  {
+    final String url = "rtsp://184.72.239.149/vod/mp4:BigBuckBunny_175k.mov?tcp";
+    
+    String[] args = new String[]{
+        "--containerformat",
+        "flv",
+        "--acodec",
+        "libmp3lame",
+        "--asamplerate",
+        "22050",
+        "--achannels",
+        "1",
+        "--abitrate",
+        "64000",
+        "--aquality",
+        "0",
+        "--vcodec",
+        "flv",
+        "--vscalefactor",
+        "1.0",
+        "--vbitrate",
+        "300000",
+        "--vbitratetolerance",
+        "12000000",
+        "--vquality",
+        "0",
+        "--realtime", // this will stream out to an RTMP server
+        url,
+        "com.xuggle.xuggler.RTMPPublishingExhaustiveTest#testRTSPRead.flv"
+    };
+    
+    log.error("Testing connection to: {}", url);
+    Converter converter = new Converter();
+    
+    Options options = converter.defineOptions();
+  
+    CommandLine cmdLine = converter.parseOptions(options, args);
+    assertTrue("all commandline options successful", cmdLine != null);
+    
+    final long startTime = System.nanoTime();
+    converter.run(cmdLine);
+    final long endTime = System.nanoTime();
+    final long delta = endTime - startTime;
+    // 20 second test file;
+    assertTrue("did not take long enough", delta >= 18L*1000*1000*1000);
+    System.err.println("Total time taken: " + delta + "; url=" + url);
+    //assertTrue("took too long", delta <= 60L*1000*1000*1000);
+    
+  }
+
   @Test
   public void testRTMPRead() throws ParseException
   {
@@ -85,7 +141,7 @@ public class RTMPPublishingExhaustiveTest
   }
 
 
-  //@Test
+  @Test
   public void testRTMPPublishSorenson() throws ParseException
   {
     if (!rtmpPortOpen())
@@ -139,7 +195,7 @@ public class RTMPPublishingExhaustiveTest
     
   }
 
-  //@Test
+  @Test
   public void testRTMPPublishH264() throws ParseException
   {
     if (!rtmpPortOpen())
