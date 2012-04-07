@@ -4,7 +4,7 @@
 
  <groupId>com.xuggle</groupId>
  <artifactId>xuggle-xuggler-test</artifactId>
- <version>5.3</version>
+ <version>5.4</version>
  <packaging>jar</packaging>
 
  <name>xuggle-xuggler-test</name>
@@ -19,7 +19,7 @@
   <dependency>
    <groupId>xuggle</groupId>
    <artifactId>xuggle-xuggler</artifactId>
-   <version>5.3</version>
+   <version>5.4</version>
    <scope>test</scope>
   </dependency>
   <dependency>
@@ -31,7 +31,7 @@
   <dependency>
    <groupId>xuggle</groupId>
    <artifactId>xuggle-utils</artifactId>
-   <version>1.21.888.200908201439</version>
+   <version>1.22</version>
   </dependency>
  </dependencies>
  <developers>
