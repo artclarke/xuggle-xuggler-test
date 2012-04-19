@@ -215,5 +215,38 @@ public class ConverterExhaustiveTest extends TestCase
     
     converter.run(cmdLine);
   }
+  /**
+   * Test that AAC in a m4a container works (Marc Palmer on the user alias
+   * claimed it did not).
+   * @throws ParseException
+   */
+  public void testConversionAacM4a() throws ParseException
+  {
+    String[] args = new String[]{
+        "--containerformat",
+        "m4a",
+        "--acodec",
+        "libvo_aacenc",
+        "--asamplerate",
+        "22050",
+        "--achannels",
+        "2",
+        "--abitrate",
+        "64000",
+        "--aquality",
+        "0",
+        "--vno",
+        "fixtures/testfile_videoonly_20sec.flv",
+        this.getClass().getName() + "_" + this.getName() + ".m4a"
+    };
+    
+    converter = new Converter();
+    
+    Options options = converter.defineOptions();
 
+    CommandLine cmdLine = converter.parseOptions(options, args);
+    assertTrue("all commandline options successful", cmdLine != null);
+    
+    converter.run(cmdLine);
+  }
 }
